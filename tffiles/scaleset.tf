@@ -49,7 +49,7 @@ resource "azurerm_virtual_machine_scale_set" "example" {
 
   os_profile {
     computer_name_prefix = "testvm"
-    admin_username       = "clouduser"
+    admin_username       = var.username
     admin_password = "Password1234"
     custom_data = file("userdata.sh")
     # custom_data          = base64encode(file("${path.module}/userdata.sh"))
@@ -60,7 +60,7 @@ resource "azurerm_virtual_machine_scale_set" "example" {
 
     ssh_keys {
       path     = "/home/clouduser/.ssh/authorized_keys"
-      key_data = file("~/Downloads/key/oguzhankey.pub")
+      key_data = data.azurerm_ssh_public_key.key.public_key
     }
   }
 
@@ -77,4 +77,9 @@ resource "azurerm_virtual_machine_scale_set" "example" {
     }
   }
 
+}
+data "azurerm_ssh_public_key" "key" {
+  resource_group_name = "sshkey"
+  name = "azure"
+  
 }

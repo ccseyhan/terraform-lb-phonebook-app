@@ -3,7 +3,7 @@ provider "azurerm" {
   features {}
 }
 provider "github" {
-  token = file("~/Downloads/key/github-token.txt")
+  token = file("${var.token}")
 }
 resource "github_repository_file" "dbendpoint" {
   content             = azurerm_mysql_flexible_server.example.fqdn
@@ -11,4 +11,7 @@ resource "github_repository_file" "dbendpoint" {
   repository          = "terraform-lb-phonebook-app"
   branch              = "main"
   overwrite_on_create = true
+  depends_on = [
+    azurerm_mysql_flexible_server.example
+  ]
 }

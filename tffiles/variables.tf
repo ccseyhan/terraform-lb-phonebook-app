@@ -1,7 +1,7 @@
-# Define variables for the configuration
-variable "subscription_id" {
-default = "67882e92-6412-4fc5-b9ca-1030aa09d729"
-}
+# # Define variables for the configuration
+# variable "subscription_id" {
+# default = "67882e92-6412-4fc5-b9ca-1030aa09d729"
+# }
 
 variable "resource_group_name" {
 default = "phonebook-resource-group"
@@ -16,4 +16,17 @@ default = [
 
 variable "vm_scale_set_name" {
 default = "phonebook-vm-scale-set"
+}
+
+variable "token" {
+    default = "~/main/ssh-keys/githubtoken"
+}
+
+variable "username" {
+    default = "clouduser"
+}
+
+variable "key_path" {
+    default = "~/main/ssh-keys/azure.pem"
+  
 }
